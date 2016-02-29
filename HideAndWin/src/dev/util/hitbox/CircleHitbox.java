@@ -1,6 +1,6 @@
-package util.hitbox;
+package dev.util.hitbox;
 
-import util.geom.Point2D;
+import dev.util.geom.Point2D;
 
 public class CircleHitbox implements IHitbox {
 	private Point2D centre;

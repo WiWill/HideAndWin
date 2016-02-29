@@ -1,4 +1,4 @@
-package util.hitbox;
+package dev.util.hitbox;
 
 public interface IHitbox {
 	

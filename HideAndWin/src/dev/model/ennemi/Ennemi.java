@@ -1,6 +1,6 @@
-package model.ennemi;
+package dev.model.ennemi;
 
-import util.hitbox.IHitbox;
+import dev.util.hitbox.IHitbox;
 
 public class Ennemi {
 	private IHitbox hitbox;

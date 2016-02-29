@@ -1,4 +1,4 @@
-package util.geom;
+package dev.util.geom;
 
 public class Point2D {
 	private int x;

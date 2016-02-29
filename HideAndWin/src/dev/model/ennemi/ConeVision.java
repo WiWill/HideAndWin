@@ -1,12 +1,13 @@
-package model.ennemi;
+package dev.model.ennemi;
 
-import util.geom.Point2D;
+import dev.util.geom.Point2D;
 
 public class ConeVision implements IVision {
 	private Point2D origine;
 	private double direction;
 	private double angle;
 	private int distance;
+	private int nbDecoupageTriangle;
 	
 	public ConeVision(Point2D origine, double direction, double angle, int distance){
 		this.origine = origine;
@@ -53,5 +54,13 @@ public class ConeVision implements IVision {
 
 	public void setDistance(int distance) {
 		this.distance = distance;
+	}
+
+	public int getNbDecoupageTriangle() {
+		return nbDecoupageTriangle;
+	}
+
+	public void setNbDecoupageTriangle(int nbDecoupageTriangle) {
+		this.nbDecoupageTriangle = nbDecoupageTriangle;
 	}
 }

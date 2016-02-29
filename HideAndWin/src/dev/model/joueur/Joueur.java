@@ -1,8 +1,8 @@
-package model.joueur;
+package dev.model.joueur;
 
-import util.geom.Point2D;
-import util.hitbox.CircleHitbox;
-import util.hitbox.IHitbox;
+import dev.util.geom.Point2D;
+import dev.util.hitbox.CircleHitbox;
+import dev.util.hitbox.IHitbox;
 
 public class Joueur {
 	private IHitbox hitbox;

@@ -1,11 +1,11 @@
-package util.hitbox.tests;
+package tests.util.hitbox;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import util.hitbox.CircleHitbox;
+import dev.util.hitbox.CircleHitbox;
 
 public class CircleHitboxTest extends IHitboxTest {
 	

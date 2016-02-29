@@ -7,6 +7,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import dev.util.graphics.GraphicsUtils;
+
 public class Game implements Runnable {
 	private long fenetre;
 	private int width;
@@ -47,7 +49,7 @@ public class Game implements Runnable {
 		glfwSwapInterval(1);
 		glfwShowWindow(this.fenetre);
 		GL.createCapabilities();
-		glClearColor(1.0f, 0.0f, 0.0f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
 	
 	private void update(){
@@ -56,6 +58,13 @@ public class Game implements Runnable {
 	
 	private void render(){
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glBegin(GL_TRIANGLES);
+		
+		glColor3f(1.0f, 1.0f, 1.0f); glVertex3f(GraphicsUtils.convertPixelToOpenGLDimension(512, this.width), GraphicsUtils.convertPixelToOpenGLDimension(256, this.height), 1.0f);
+		glColor3f(0.0f, 0.0f, 1.0f); glVertex3f(GraphicsUtils.convertPixelToOpenGLDimension(341, this.width), GraphicsUtils.convertPixelToOpenGLDimension(512, this.height), 1.0f);
+		glColor3f(0.0f, 0.0f, 1.0f); glVertex3f(GraphicsUtils.convertPixelToOpenGLDimension(682, this.width), GraphicsUtils.convertPixelToOpenGLDimension(512, this.height), 1.0f);
+		
+		glEnd();
 		glfwSwapBuffers(this.fenetre);
 	}
 

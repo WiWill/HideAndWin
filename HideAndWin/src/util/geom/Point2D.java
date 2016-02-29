@@ -1,4 +1,4 @@
-package util;
+package util.geom;
 
 public class Point2D {
 	private int x;
@@ -11,6 +11,17 @@ public class Point2D {
 	
 	public double distance(Point2D p){
 		return Math.sqrt(Math.pow(p.getX() - this.x, 2) + Math.pow(p.getY() - this.y, 2));
+	}
+	
+	public boolean equals(Point2D p){
+		return this.x == p.getX() && this.y == p.getY();
+	}
+	
+	public String toString(){
+		String res = "";
+		
+		res = "{" + this.x + "," + this.y + "}";
+		return res;
 	}
 
 	public int getX() {

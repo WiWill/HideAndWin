@@ -1,6 +1,6 @@
 package model.joueur;
 
-import util.Point2D;
+import util.geom.Point2D;
 import util.hitbox.CircleHitbox;
 import util.hitbox.IHitbox;
 

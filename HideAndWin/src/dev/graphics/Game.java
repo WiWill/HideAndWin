@@ -7,6 +7,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import dev.model.joueur.Joueur;
 import dev.util.graphics.GraphicsUtils;
 
 public class Game implements Runnable {
@@ -14,11 +15,13 @@ public class Game implements Runnable {
 	private int width;
 	private int height;
 	private boolean continuer = false;
+	private Joueur joueur;
 	
 	public Game(int width, int height){
 		this.width = width;
 		this.height = height;
 		this.continuer = true;
+		this.joueur = new Joueur(200, 200, 20);
 	}
 
 	@Override
@@ -58,13 +61,9 @@ public class Game implements Runnable {
 	
 	private void render(){
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glBegin(GL_TRIANGLES);
+
+		this.joueur.render(this.width, this.height);
 		
-		glColor3f(1.0f, 1.0f, 1.0f); glVertex3f(GraphicsUtils.convertPixelToOpenGLDimension(512, this.width), GraphicsUtils.convertPixelToOpenGLDimension(256, this.height), 1.0f);
-		glColor3f(0.0f, 0.0f, 1.0f); glVertex3f(GraphicsUtils.convertPixelToOpenGLDimension(341, this.width), GraphicsUtils.convertPixelToOpenGLDimension(512, this.height), 1.0f);
-		glColor3f(0.0f, 0.0f, 1.0f); glVertex3f(GraphicsUtils.convertPixelToOpenGLDimension(682, this.width), GraphicsUtils.convertPixelToOpenGLDimension(512, this.height), 1.0f);
-		
-		glEnd();
 		glfwSwapBuffers(this.fenetre);
 	}
 

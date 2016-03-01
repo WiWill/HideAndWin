@@ -7,8 +7,11 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 
+import dev.model.ennemi.ConeVision;
+import dev.model.ennemi.Ennemi;
 import dev.model.joueur.Joueur;
-import dev.util.graphics.GraphicsUtils;
+import dev.util.geom.Point2D;
+import dev.util.hitbox.CircleHitbox;
 
 public class Game implements Runnable {
 	private long fenetre;
@@ -16,12 +19,14 @@ public class Game implements Runnable {
 	private int height;
 	private boolean continuer = false;
 	private Joueur joueur;
+	private Ennemi ennemi;
 	
 	public Game(int width, int height){
 		this.width = width;
 		this.height = height;
 		this.continuer = true;
 		this.joueur = new Joueur(200, 200, 20);
+		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 20), new ConeVision(new Point2D(600, 200), 135, 15, 300));
 	}
 
 	@Override
@@ -63,6 +68,7 @@ public class Game implements Runnable {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		this.joueur.render(this.width, this.height);
+		this.ennemi.render(this.width, this.height);
 		
 		glfwSwapBuffers(this.fenetre);
 	}

@@ -11,7 +11,7 @@ public class CircleHitboxTest extends IHitboxTest {
 	
 	@Before
 	public void doBefore(){
-		this.hitbox = new CircleHitbox(0, 0, 10);
+		this.hitbox = new CircleHitbox(0, 0, 0, 10);
 	}
 	
 	@Test
@@ -19,8 +19,9 @@ public class CircleHitboxTest extends IHitboxTest {
 		//Param
 		final int x = 500;
 		final int y = 500;
+		final int z = 0;
 		final int rayon = 10;
-		CircleHitbox box = new CircleHitbox(x, y, rayon);
+		CircleHitbox box = new CircleHitbox(x, y, z, rayon);
 		
 		//Resultat attendu
 		final boolean result = false;
@@ -35,7 +36,7 @@ public class CircleHitboxTest extends IHitboxTest {
 		final int x = 0;
 		final int y = 20;
 		final int rayon = 10;
-		CircleHitbox box = new CircleHitbox(x, y, rayon);
+		CircleHitbox box = new CircleHitbox(x, y, 0, rayon);
 		
 		//Resultat attendu
 		final boolean result = true;
@@ -50,7 +51,7 @@ public class CircleHitboxTest extends IHitboxTest {
 		final int x = 0;
 		final int y = 10;
 		final int rayon = 10;
-		CircleHitbox box = new CircleHitbox(x, y, rayon);
+		CircleHitbox box = new CircleHitbox(x, y, 0, rayon);
 		
 		//Resultat attendu
 		final boolean result = true;
@@ -65,7 +66,7 @@ public class CircleHitboxTest extends IHitboxTest {
 		final int x = 0;
 		final int y = 500;
 		final int rayon = 490;
-		CircleHitbox box = new CircleHitbox(x, y, rayon);
+		CircleHitbox box = new CircleHitbox(x, y, 0, rayon);
 		
 		//Resultat attendu
 		final boolean result = true;
@@ -80,7 +81,7 @@ public class CircleHitboxTest extends IHitboxTest {
 		final int x = 0;
 		final int y = 500;
 		final int rayon = 600;
-		CircleHitbox box = new CircleHitbox(x, y, rayon);
+		CircleHitbox box = new CircleHitbox(x, y, 0, rayon);
 		
 		//Resultat attendu
 		final boolean result = true;

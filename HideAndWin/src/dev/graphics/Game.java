@@ -10,8 +10,8 @@ import org.lwjgl.opengl.GL;
 import dev.model.ennemi.ConeVision;
 import dev.model.ennemi.Ennemi;
 import dev.model.joueur.Joueur;
-import dev.util.geom.Point2D;
 import dev.util.hitbox.CircleHitbox;
+import dev.util.math.Vecteur4f;
 
 public class Game implements Runnable {
 	private long fenetre;
@@ -20,13 +20,15 @@ public class Game implements Runnable {
 	private boolean continuer = false;
 	private Joueur joueur;
 	private Ennemi ennemi;
+	private Cube cube;
 	
 	public Game(int width, int height){
 		this.width = width;
 		this.height = height;
 		this.continuer = true;
-		this.joueur = new Joueur(200, 200, 20);
-		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 20), new ConeVision(new Point2D(600, 200), 135, 15, 300));
+		this.joueur = new Joueur(200, 200, 0, 20);
+		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
+		this.cube = new Cube(new Vecteur4f(0f, 0f, 0f, 1f));
 	}
 
 	@Override
@@ -57,6 +59,8 @@ public class Game implements Runnable {
 		glfwSwapInterval(1);
 		glfwShowWindow(this.fenetre);
 		GL.createCapabilities();
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	}
 	
@@ -69,6 +73,7 @@ public class Game implements Runnable {
 
 		this.joueur.render(this.width, this.height);
 		this.ennemi.render(this.width, this.height);
+		this.cube.render();
 		
 		glfwSwapBuffers(this.fenetre);
 	}

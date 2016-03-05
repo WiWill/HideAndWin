@@ -59,12 +59,17 @@ public class Cube {
 	
 	public void render(){
 		Vecteur4f[] res = new Vecteur4f[36];
-		Matrice4f matriceHomogene = Matrice4f.homothetie(0.25f);
-
-		matriceHomogene = matriceHomogene.multipliee(Matrice4f.rotationAxeX(45f));
-		matriceHomogene = matriceHomogene.multipliee(Matrice4f.rotationAxeY(45f));
-		matriceHomogene = matriceHomogene.multipliee(Matrice4f.rotationAxeZ(45f));
-		matriceHomogene = matriceHomogene.multipliee(Matrice4f.translation(this.position));
+		Matrice4f matriceHomogene;
+		
+		matriceHomogene = Matrice4f.translation(this.position)
+				.multipliee(Matrice4f.rotationAxeZ(45f)
+						.multipliee(Matrice4f.rotationAxeY(45f)
+								.multipliee(Matrice4f.rotationAxeX(45f)
+										.multipliee(Matrice4f.homothetie(0.25f)
+								)
+						)
+				)
+		);
 		for(int i = 0; i < 36; i++){
 			res[i] = this.sommets[i].transformation(matriceHomogene);
 		}

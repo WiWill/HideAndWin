@@ -20,7 +20,10 @@ public class Game implements Runnable {
 	private boolean continuer = false;
 	private Joueur joueur;
 	private Ennemi ennemi;
-	private Cube cube;
+	private Cube cube1;
+	private Cube cube2;
+	private Cube cube3;
+	private Cube cube4;
 	
 	public Game(int width, int height){
 		this.width = width;
@@ -28,7 +31,10 @@ public class Game implements Runnable {
 		this.continuer = true;
 		this.joueur = new Joueur(200, 200, 0, 20);
 		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
-		this.cube = new Cube(new Vecteur4f(0f, 0f, 0f, 1f));
+		this.cube1 = new Cube(new Vecteur4f(0f, 0f, 0f, 1f));
+		this.cube2 = new Cube(new Vecteur4f(2f, 0f, 0f, 1f));
+		this.cube3 = new Cube(new Vecteur4f(-2f, 0f, 0f, 1f));
+		this.cube4 = new Cube(new Vecteur4f(0f, 2f, 0f, 1f));
 	}
 
 	@Override
@@ -73,7 +79,10 @@ public class Game implements Runnable {
 
 		this.joueur.render(this.width, this.height);
 		this.ennemi.render(this.width, this.height);
-		this.cube.render();
+		this.cube1.render();
+		this.cube2.render();
+		this.cube3.render();
+		this.cube4.render();
 		
 		glfwSwapBuffers(this.fenetre);
 	}

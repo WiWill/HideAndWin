@@ -62,12 +62,8 @@ public class Cube {
 		Matrice4f matriceHomogene;
 		
 		matriceHomogene = Matrice4f.translation(this.position)
-				.multipliee(Matrice4f.rotationAxeZ(45f)
-						.multipliee(Matrice4f.rotationAxeY(45f)
-								.multipliee(Matrice4f.rotationAxeX(45f)
-										.multipliee(Matrice4f.homothetie(0.25f)
-								)
-						)
+				.multipliee(Matrice4f.rotationXYZ(45f, 45f, 45f)
+						.multipliee(Matrice4f.homothetie(0.25f)
 				)
 		);
 		for(int i = 0; i < 36; i++){

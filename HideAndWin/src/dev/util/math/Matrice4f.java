@@ -78,6 +78,25 @@ public class Matrice4f {
 		return res;
 	}
 	
+	public static Matrice4f rotationXYZ(float angleX, float angleY, float angleZ){
+		boolean modif = false;
+		Matrice4f res = null;
+		
+		if(angleZ != 0.0f){
+			res = Matrice4f.rotationAxeZ(angleZ);
+			modif = true;
+		}
+		if(angleY != 0.0f){
+			res = modif ? res.multipliee(Matrice4f.rotationAxeY(angleY)) : Matrice4f.rotationAxeY(angleY);
+			modif = true;
+		}
+		if(angleX != 0.0f){
+			res = modif ? res.multipliee(Matrice4f.rotationAxeX(angleX)) : Matrice4f.rotationAxeX(angleX);
+			modif = true;
+		}
+		return modif ? res : Matrice4f.identite();
+	}
+	
 	public Matrice4f multipliee(Matrice4f matrice){
 		Matrice4f res = new Matrice4f();
 		

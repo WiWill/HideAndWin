@@ -6,9 +6,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import dev.util.math.Matrice4f;
+import dev.util.math.Vecteur4f;
+import dev.util.render.Buffer;
 
 public class Shader {
 	private int programID;
+	private Map<String, Integer> locations = new HashMap<String, Integer>();
 	
 	public Shader(String vertexPath, String fragmentPath){
 		this.programID = creationShader(vertexPath, fragmentPath);
@@ -43,6 +50,7 @@ public class Shader {
 			
 			while((ligne = br.readLine()) != null){
 				sb.append(ligne);
+				sb.append("\n");
 			}
 		} catch (FileNotFoundException e){
 			System.err.println("Erreur d'ouverture du fichier !");
@@ -57,6 +65,51 @@ public class Shader {
 		}
 		
 		return sb.toString();
+	}
+	
+	public int getUniform(String nom){
+		int res;
+		
+		if(this.locations.containsKey(nom)){
+			return this.locations.get(nom);
+		}
+		
+		res = glGetUniformLocation(this.programID, nom);
+		if(res == -1){
+			System.err.println("La variable " + nom + " n'existe pas !");
+		} else {
+			this.locations.put(nom, res);
+		}
+		
+		return res;
+	}
+	
+	public void setUniform1i(String nom, int val){
+		glUniform1i(getUniform(nom), val);	
+	}
+	
+	public void setUniform1f(String nom, float val){
+		glUniform1f(getUniform(nom), val);	
+	}
+	
+	public void setUniform2f(String nom, float x, float y){
+		glUniform2f(getUniform(nom), x, y);	
+	}
+	
+	public void setUniform3f(String nom, Vecteur4f v){
+		glUniform3f(getUniform(nom), v.getX(), v.getY(), v.getZ());	
+	}
+	
+	public void setUniformMat4f(String nom, Matrice4f m){
+		glUniformMatrix4fv(getUniform(nom), false, Buffer.conversionFloatBuffer(m.getMatrice()));	
+	}
+	
+	public void enable(){
+		glUseProgram(this.programID);
+	}
+	
+	public void disable(){
+		glUseProgram(0);
 	}
 
 	public int getProgramID() {

@@ -10,6 +10,7 @@ public class Cube {
 	private int[] indices;
 	private Shader shader;
 	private VertexArrayObject vao;
+	float rotationX = 0.0f, rotationY = 0.0f, rotationZ = 0.0f;
 	
 	public Cube(Vecteur4f position, String vertPath, String fragPath){
 		this.position = position;
@@ -55,8 +56,21 @@ public class Cube {
 	public void render(){
 		Matrice4f matriceHomogene;
 		
+		rotationX++;
+		if(rotationX >= 360f){
+			rotationX = 0f;
+		}
+		rotationY++;
+		if(rotationY >= 360f){
+			rotationY = 0f;
+		}
+		rotationZ++;
+		if(rotationZ >= 360f){
+			rotationZ = 0f;
+		}
+
 		matriceHomogene = Matrice4f.translation(this.position)
-				.multipliee(Matrice4f.rotationXYZ(45f, 45f, 45f)
+				.multipliee(Matrice4f.rotationXYZ(rotationX, rotationY, rotationZ)
 						.multipliee(Matrice4f.homothetie(0.25f)
 				)
 		);

@@ -29,12 +29,6 @@ public class Game implements Runnable {
 		this.width = width;
 		this.height = height;
 		this.continuer = true;
-		this.joueur = new Joueur(200, 200, 0, 20);
-		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
-		this.cube1 = new Cube(new Vecteur4f(0f, 0f, 0f, 1f));
-		this.cube2 = new Cube(new Vecteur4f(2f, 0f, 0f, 1f));
-		this.cube3 = new Cube(new Vecteur4f(-2f, 0f, 0f, 1f));
-		this.cube4 = new Cube(new Vecteur4f(0f, 2f, 0f, 1f));
 	}
 
 	@Override
@@ -64,10 +58,19 @@ public class Game implements Runnable {
 		glfwMakeContextCurrent(this.fenetre);
 		glfwSwapInterval(1);
 		glfwShowWindow(this.fenetre);
+		
 		GL.createCapabilities();
+		
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+		
+		this.joueur = new Joueur(200, 200, 0, 20);
+		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
+		this.cube1 = new Cube(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube2 = new Cube(new Vecteur4f(2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube3 = new Cube(new Vecteur4f(-2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube4 = new Cube(new Vecteur4f(0f, 2f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
 	}
 	
 	private void update(){

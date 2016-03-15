@@ -1,64 +1,58 @@
 package dev.graphics;
 
-import static org.lwjgl.opengl.GL11.*;
 import dev.util.math.Matrice4f;
 import dev.util.math.Vecteur4f;
 
 public class Cube {
 	private Vecteur4f position;
-	private Vecteur4f[] sommets = new Vecteur4f[36];
+	private float[] sommets;
+	private float[] couleurs;
+	private int[] indices;
+	private Shader shader;
+	private VertexArrayObject vao;
 	
-	public Cube(Vecteur4f position){
+	public Cube(Vecteur4f position, String vertPath, String fragPath){
 		this.position = position;
-		init();
+		init(vertPath, fragPath);
 	}
 	
-	private void init(){
-		this.sommets[0] = new Vecteur4f(-1.0f, 1.0f, -1.0f, 1);
-		this.sommets[1] = new Vecteur4f(-1.0f, -1.0f, -1.0f, 1);
-		this.sommets[2] = new Vecteur4f(-1.0f, 1.0f, 1.0f, 1);
-		this.sommets[3] = new Vecteur4f(-1.0f, 1.0f, 1.0f, 1);
-		this.sommets[4] = new Vecteur4f(-1.0f, -1.0f, -1.0f, 1);
-		this.sommets[5] = new Vecteur4f(-1.0f, -1.0f, 1.0f, 1);
+	private void init(String vertPath, String fragPath){
+		this.sommets = new float[]{
+				-1.0f, 1.0f, -1.0f,
+				-1.0f, -1.0f, -1.0f,
+				-1.0f, 1.0f, 1.0f,
+				-1.0f, -1.0f, 1.0f,
+				1.0f, 1.0f, 1.0f,
+				1.0f, -1.0f, 1.0f,
+				1.0f, 1.0f, -1.0f,
+				1.0f, -1.0f, -1.0f
+		};
+
+		this.couleurs = new float[]{
+			1.0f, 0.0f, 0.0f,
+			1.0f, 0.0f, 1.0f,
+			1.0f, 1.0f, 1.0f,
+			0.0f, 0.0f, 1.0f,
+			0.0f, 1.0f, 0.0f,
+			0.0f, 1.0f, 1.0f,
+			1.0f, 1.0f, 0.0f,
+			1.0f, 1.0f, 1.0f
+		};
 		
-		this.sommets[6] = new Vecteur4f(1.0f, 1.0f, 1.0f, 1);
-		this.sommets[7] = new Vecteur4f(1.0f, -1.0f, 1.0f, 1);
-		this.sommets[8] = new Vecteur4f(1.0f, 1.0f, -1.0f, 1);
-		this.sommets[9] = new Vecteur4f(1.0f, 1.0f, -1.0f, 1);
-		this.sommets[10] = new Vecteur4f(1.0f, -1.0f, 1.0f, 1);
-		this.sommets[11] = new Vecteur4f(1.0f, -1.0f, -1.0f, 1);
+		this.indices = new int[]{
+			0, 1, 2, 2, 1, 3,
+			4, 5, 6, 6, 5, 7,
+			3, 1, 5, 5, 1, 7,
+			0, 2, 6, 6, 2, 4,
+			6, 7, 0, 0, 7, 1,
+			2, 3, 4, 4, 3, 5
+		};
 		
-		this.sommets[12] = new Vecteur4f(-1.0f, -1.0f, 1.0f, 1);
-		this.sommets[13] = new Vecteur4f(-1.0f, -1.0f, -1.0f, 1);
-		this.sommets[14] = new Vecteur4f(1.0f, -1.0f, 1.0f, 1);
-		this.sommets[15] = new Vecteur4f(1.0f, -1.0f, 1.0f, 1);
-		this.sommets[16] = new Vecteur4f(-1.0f, -1.0f, -1.0f, 1);
-		this.sommets[17] = new Vecteur4f(1.0f, -1.0f, -1.0f, 1);
-		
-		this.sommets[18] = new Vecteur4f(-1.0f, 1.0f, -1.0f, 1);
-		this.sommets[19] = new Vecteur4f(-1.0f, 1.0f, 1.0f, 1);
-		this.sommets[20] = new Vecteur4f(1.0f, 1.0f, -1.0f, 1);
-		this.sommets[21] = new Vecteur4f(1.0f, 1.0f, -1.0f, 1);
-		this.sommets[22] = new Vecteur4f(-1.0f, 1.0f, 1.0f, 1);
-		this.sommets[23] = new Vecteur4f(1.0f, 1.0f, 1.0f, 1);
-		
-		this.sommets[24] = new Vecteur4f(1.0f, 1.0f, -1.0f, 1);
-		this.sommets[25] = new Vecteur4f(1.0f, -1.0f, -1.0f, 1);
-		this.sommets[26] = new Vecteur4f(-1.0f, 1.0f, -1.0f, 1);
-		this.sommets[27] = new Vecteur4f(-1.0f, 1.0f, -1.0f, 1);
-		this.sommets[28] = new Vecteur4f(1.0f, -1.0f, -1.0f, 1);
-		this.sommets[29] = new Vecteur4f(-1.0f, -1.0f, -1.0f, 1);
-		
-		this.sommets[30] = new Vecteur4f(-1.0f, 1.0f, 1.0f, 1);
-		this.sommets[31] = new Vecteur4f(-1.0f, -1.0f, 1.0f, 1);
-		this.sommets[32] = new Vecteur4f(1.0f, 1.0f, 1.0f, 1);
-		this.sommets[33] = new Vecteur4f(1.0f, 1.0f, 1.0f, 1);
-		this.sommets[34] = new Vecteur4f(-1.0f, -1.0f, 1.0f, 1);
-		this.sommets[35] = new Vecteur4f(1.0f, -1.0f, 1.0f, 1);
+		this.shader = new Shader(vertPath, fragPath);
+		this.vao = new VertexArrayObject(this.sommets, this.indices, this.couleurs);
 	}
 	
 	public void render(){
-		Vecteur4f[] res = new Vecteur4f[36];
 		Matrice4f matriceHomogene;
 		
 		matriceHomogene = Matrice4f.translation(this.position)
@@ -66,16 +60,10 @@ public class Cube {
 						.multipliee(Matrice4f.homothetie(0.25f)
 				)
 		);
-		for(int i = 0; i < 36; i++){
-			res[i] = this.sommets[i].transformation(matriceHomogene);
-		}
-		glBegin(GL_TRIANGLES);
-		for(int i = 0; i < 12; i++){
-			glColor3f(1.0f / (float) i, 1.0f / (float) i, 1.0f / (float) i);
-			glVertex3f(res[0 + i * 3].getX(), res[0 + i * 3].getY(), res[0 + i * 3].getZ());
-			glVertex3f(res[1 + i * 3].getX(), res[1 + i * 3].getY(), res[1 + i * 3].getZ());
-			glVertex3f(res[2 + i * 3].getX(), res[2 + i * 3].getY(), res[2 + i * 3].getZ());
-		}
-		glEnd();
+		
+		this.shader.enable();
+		this.shader.setUniformMat4f("ModelViewProjectionMatrix", matriceHomogene);
+		this.vao.render();
+		this.shader.disable();
 	}
 }

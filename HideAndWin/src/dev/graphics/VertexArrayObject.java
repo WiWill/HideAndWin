@@ -13,7 +13,7 @@ public class VertexArrayObject {
 	private int cbo;
 	private int nbIndices;
 	
-	public VertexArrayObject(float[] sommets, float[] indices, float[] couleurs){
+	public VertexArrayObject(float[] sommets, int[] indices, float[] couleurs){
 		this.nbIndices = indices.length;
 		this.vao = glGenVertexArrays();
 		glBindVertexArray(this.vao);
@@ -32,7 +32,7 @@ public class VertexArrayObject {
 		
 		this.ibo = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.ibo);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, Buffer.conversionFloatBuffer(indices), GL_STATIC_DRAW);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, Buffer.conversionIntBuffer(indices), GL_STATIC_DRAW);
 		
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -50,6 +50,12 @@ public class VertexArrayObject {
 	}
 	
 	public void draw(){
-		glDrawElements(GL_TRIANGLES, this.nbIndices, GL_UNSIGNED_BYTE, 0);
+		glDrawElements(GL_TRIANGLES, this.nbIndices, GL_UNSIGNED_INT, 0);
+	}
+	
+	public void render(){
+		bind();
+		draw();
+		unbind();
 	}
 }

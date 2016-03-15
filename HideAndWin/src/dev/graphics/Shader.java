@@ -1,5 +1,6 @@
 package dev.graphics;
 
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL20.*;
 
 import java.io.BufferedReader;
@@ -32,6 +33,14 @@ public class Shader {
 		glShaderSource(fragmentID, fragmentSource);
 		glCompileShader(vertexID);
 		glCompileShader(fragmentID);
+		
+		if(glGetShaderi(vertexID, GL_COMPILE_STATUS) == GLFW_FALSE){
+			System.err.println("Erreur de compilation du vertex shader !");
+		}
+		if(glGetShaderi(fragmentID, GL_COMPILE_STATUS) == GLFW_FALSE){
+			System.err.println("Erreur de compilation du fragment shader !");
+		}
+		
 		glAttachShader(prog, vertexID);
 		glAttachShader(prog, fragmentID);
 		glLinkProgram(prog);

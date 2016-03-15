@@ -37,6 +37,18 @@ public class Vecteur4f {
 		return new Vecteur4f(x, y, z, w);
 	}
 	
+	public static float[] conversionVecteur4fVersTableau3f(Vecteur4f[] v){
+		float[] res = new float[v.length * 3];
+		
+		for(int i = 0; i < v.length; i++){
+			res[0 + i * 3] = v[i].getX();
+			res[1 + i * 3] = v[i].getY();
+			res[2 + i * 3] = v[i].getZ();
+		}
+		
+		return res;
+	}
+	
 	public float getX() {
 		return x;
 	}

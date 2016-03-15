@@ -112,7 +112,15 @@ public class Matrice4f {
 		}
 		return res;
 	}
-	
+
+	public float[] getMatrice() {
+		return matrice;
+	}
+
+	public void setMatrice(float[] matrice) {
+		this.matrice = matrice;
+	}
+
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		

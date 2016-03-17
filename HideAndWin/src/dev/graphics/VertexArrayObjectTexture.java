@@ -6,14 +6,14 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import dev.util.render.Buffer;
 
-public class VertexArrayObject {
+public class VertexArrayObjectTexture implements IVertexArrayObject {
 	private int vao;
 	private int vbo;
 	private int ibo;
-	private int cbo;
+	private int tco;
 	private int nbIndices;
 	
-	public VertexArrayObject(float[] sommets, int[] indices, float[] couleurs){
+	public VertexArrayObjectTexture(float[] sommets, int[] indices, float[] uv){
 		this.nbIndices = indices.length;
 		this.vao = glGenVertexArrays();
 		glBindVertexArray(this.vao);
@@ -24,10 +24,10 @@ public class VertexArrayObject {
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0);
 		glEnableVertexAttribArray(0);
 		
-		this.cbo = glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, this.cbo);
-		glBufferData(GL_ARRAY_BUFFER, Buffer.conversionFloatBuffer(couleurs), GL_STATIC_DRAW);
-		glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 0);
+		this.tco = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, this.tco);
+		glBufferData(GL_ARRAY_BUFFER, Buffer.conversionFloatBuffer(uv), GL_STATIC_DRAW);
+		glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 		glEnableVertexAttribArray(1);
 		
 		this.ibo = glGenBuffers();
@@ -39,20 +39,24 @@ public class VertexArrayObject {
 		glBindVertexArray(0);
 	}
 	
+	@Override
 	public void bind(){
 		glBindVertexArray(this.vao);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.ibo);
 	}
 	
+	@Override
 	public void unbind(){
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 	
+	@Override
 	public void draw(){
 		glDrawElements(GL_TRIANGLES, this.nbIndices, GL_UNSIGNED_INT, 0);
 	}
 	
+	@Override
 	public void render(){
 		bind();
 		draw();

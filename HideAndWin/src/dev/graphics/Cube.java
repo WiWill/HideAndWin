@@ -9,7 +9,7 @@ public class Cube {
 	private float[] couleurs;
 	private int[] indices;
 	private Shader shader;
-	private VertexArrayObject vao;
+	private VertexArrayObjectColor vao;
 	float rotationX = 0.0f, rotationY = 0.0f, rotationZ = 0.0f;
 	
 	public Cube(Vecteur4f position, String vertPath, String fragPath){
@@ -50,7 +50,7 @@ public class Cube {
 		};
 		
 		this.shader = new Shader(vertPath, fragPath);
-		this.vao = new VertexArrayObject(this.sommets, this.indices, this.couleurs);
+		this.vao = new VertexArrayObjectColor(this.sommets, this.indices, this.couleurs);
 	}
 	
 	public void render(){

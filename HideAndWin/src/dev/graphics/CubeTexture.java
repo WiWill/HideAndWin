@@ -3,16 +3,16 @@ package dev.graphics;
 import dev.util.math.Matrice4f;
 import dev.util.math.Vecteur4f;
 
-public class Cube {
+public class CubeTexture implements ICube {
 	private Vecteur4f position;
 	private float[] sommets;
-	private float[] couleurs;
+	private float[] uv;
 	private int[] indices;
 	private Shader shader;
-	private VertexArrayObjectColor vao;
+	private VertexArrayObjectTexture vao;
 	float rotationX = 0.0f, rotationY = 0.0f, rotationZ = 0.0f;
 	
-	public Cube(Vecteur4f position, String vertPath, String fragPath){
+	public CubeTexture(Vecteur4f position, String vertPath, String fragPath, String texturePath){
 		this.position = position;
 		init(vertPath, fragPath);
 	}
@@ -29,7 +29,7 @@ public class Cube {
 				1.0f, -1.0f, -1.0f
 		};
 
-		this.couleurs = new float[]{
+		this.uv = new float[]{
 			1.0f, 0.0f, 0.0f,
 			1.0f, 0.0f, 1.0f,
 			1.0f, 1.0f, 1.0f,
@@ -50,9 +50,10 @@ public class Cube {
 		};
 		
 		this.shader = new Shader(vertPath, fragPath);
-		this.vao = new VertexArrayObjectColor(this.sommets, this.indices, this.couleurs);
+		this.vao = new VertexArrayObjectTexture(this.sommets, this.indices, this.uv);
 	}
 	
+	@Override
 	public void render(){
 		Matrice4f matriceHomogene;
 		

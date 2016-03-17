@@ -20,10 +20,10 @@ public class Game implements Runnable {
 	private boolean continuer = false;
 	private Joueur joueur;
 	private Ennemi ennemi;
-	private Cube cube1;
-	private Cube cube2;
-	private Cube cube3;
-	private Cube cube4;
+	private ICube cube1;
+	private ICube cube2;
+	private ICube cube3;
+	private ICube cube4;
 	
 	public Game(int width, int height){
 		this.width = width;
@@ -67,10 +67,10 @@ public class Game implements Runnable {
 		
 		this.joueur = new Joueur(200, 200, 0, 20);
 		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
-		this.cube1 = new Cube(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
-		this.cube2 = new Cube(new Vecteur4f(2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
-		this.cube3 = new Cube(new Vecteur4f(-2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
-		this.cube4 = new Cube(new Vecteur4f(0f, 2f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube1 = new CubeCouleur(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube2 = new CubeCouleur(new Vecteur4f(2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube3 = new CubeCouleur(new Vecteur4f(-2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube4 = new CubeCouleur(new Vecteur4f(0f, 2f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
 	}
 	
 	private void update(){

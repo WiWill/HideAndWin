@@ -10,14 +10,15 @@ public class CubeTexture implements ICube {
 	private int[] indices;
 	private Shader shader;
 	private VertexArrayObjectTexture vao;
+	private Texture texture;
 	float rotationX = 0.0f, rotationY = 0.0f, rotationZ = 0.0f;
 	
 	public CubeTexture(Vecteur4f position, String vertPath, String fragPath, String texturePath){
 		this.position = position;
-		init(vertPath, fragPath);
+		init(vertPath, fragPath, texturePath);
 	}
 	
-	private void init(String vertPath, String fragPath){
+	private void init(String vertPath, String fragPath, String texturePath){
 		this.sommets = new float[]{
 				-1.0f, 1.0f, -1.0f,
 				-1.0f, -1.0f, -1.0f,
@@ -30,14 +31,14 @@ public class CubeTexture implements ICube {
 		};
 
 		this.uv = new float[]{
-			1.0f, 0.0f, 0.0f,
-			1.0f, 0.0f, 1.0f,
-			1.0f, 1.0f, 1.0f,
-			0.0f, 0.0f, 1.0f,
-			0.0f, 1.0f, 0.0f,
-			0.0f, 1.0f, 1.0f,
-			1.0f, 1.0f, 0.0f,
-			1.0f, 1.0f, 1.0f
+			1.0f, 0.0f,
+			1.0f, 0.0f,
+			1.0f, 1.0f,
+			0.0f, 0.0f,
+			0.0f, 1.0f,
+			0.0f, 1.0f,
+			1.0f, 1.0f,
+			1.0f, 1.0f,
 		};
 		
 		this.indices = new int[]{
@@ -51,6 +52,7 @@ public class CubeTexture implements ICube {
 		
 		this.shader = new Shader(vertPath, fragPath);
 		this.vao = new VertexArrayObjectTexture(this.sommets, this.indices, this.uv);
+		this.texture = new Texture(texturePath);
 	}
 	
 	@Override
@@ -78,7 +80,9 @@ public class CubeTexture implements ICube {
 		
 		this.shader.enable();
 		this.shader.setUniformMat4f("ModelViewProjectionMatrix", matriceHomogene);
+		this.texture.bind();
 		this.vao.render();
+		this.texture.unbind();
 		this.shader.disable();
 	}
 }

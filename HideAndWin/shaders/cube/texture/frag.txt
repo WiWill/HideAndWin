@@ -1,0 +1,14 @@
+#version 330
+
+precision highp float;
+
+in vec2 UV;
+
+out vec4 Color;
+
+uniform sampler2D tex;
+
+void main()
+{
+	Color = texture(tex, UV);
+}

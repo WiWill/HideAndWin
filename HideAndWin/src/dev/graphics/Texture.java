@@ -56,7 +56,7 @@ public class Texture {
 		glBindTexture(GL_TEXTURE_2D, id);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.largeur, this.hauteur, 0, GL_RGBA, GL_UNSIGNED_INT, Buffer.conversionIntBuffer(res));
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.largeur, this.hauteur, 0, GL_RGBA, GL_UNSIGNED_BYTE, Buffer.conversionIntBuffer(res));
 		glBindTexture(GL_TEXTURE_2D, 0);
 		
 		return id;
@@ -68,5 +68,29 @@ public class Texture {
 	
 	public void unbind(){
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	public int getLargeur() {
+		return largeur;
+	}
+
+	public void setLargeur(int largeur) {
+		this.largeur = largeur;
+	}
+
+	public int getHauteur() {
+		return hauteur;
+	}
+
+	public void setHauteur(int hauteur) {
+		this.hauteur = hauteur;
+	}
+
+	public int getTextureID() {
+		return textureID;
+	}
+
+	public void setTextureID(int textureID) {
+		this.textureID = textureID;
 	}
 }

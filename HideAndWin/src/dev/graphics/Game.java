@@ -67,10 +67,10 @@ public class Game implements Runnable {
 		
 		this.joueur = new Joueur(200, 200, 0, 20);
 		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
-		this.cube1 = new CubeCouleur(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
-		this.cube2 = new CubeCouleur(new Vecteur4f(2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
-		this.cube3 = new CubeCouleur(new Vecteur4f(-2f, 0f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
-		this.cube4 = new CubeCouleur(new Vecteur4f(0f, 2f, 0f, 1f), "shaders/cube/vert.txt", "shaders/cube/frag.txt");
+		this.cube1 = new CubeTexture(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/texture/vert.txt", "shaders/cube/texture/frag.txt", "shaders/cube/texture/uv.bmp");
+		this.cube2 = new CubeCouleur(new Vecteur4f(2f, 0f, 0f, 1f), "shaders/cube/couleur/vert.txt", "shaders/cube/couleur/frag.txt");
+		this.cube3 = new CubeCouleur(new Vecteur4f(-2f, 0f, 0f, 1f), "shaders/cube/couleur/vert.txt", "shaders/cube/couleur/frag.txt");
+		this.cube4 = new CubeCouleur(new Vecteur4f(0f, 2f, 0f, 1f), "shaders/cube/couleur/vert.txt", "shaders/cube/couleur/frag.txt");
 	}
 	
 	private void update(){

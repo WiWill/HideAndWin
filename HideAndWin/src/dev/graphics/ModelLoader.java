@@ -1,9 +1,11 @@
 package dev.graphics;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import dev.util.graphics.InformationOBJ;
@@ -13,6 +15,31 @@ public class ModelLoader {
 
 	private ModelLoader(){
 		
+	}
+	
+	public static VAOData chargementModelVAOData(String modelPath){
+		VAOData res = null;
+		
+		try {
+			FileInputStream fis = new FileInputStream(modelPath);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			
+			try {	
+				res = (VAOData) ois.readObject(); 
+			} finally {
+				try {
+					ois.close();
+				} finally {
+					fis.close();
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 	
 	public static VAOData chargementModelOBJ(String modelPath){
@@ -168,6 +195,7 @@ public class ModelLoader {
 		int[] ind;
 		
 		for(int i = 0; i < triangles.size(); i++){
+			System.out.println(i + " / " + (triangles.size() - 1));
 			for(int j = 0; j < triangles.get(i).size(); j++){
 				int presence;
 				Vecteur4f composantTriangle = triangles.get(i).get(j);

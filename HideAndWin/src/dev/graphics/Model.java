@@ -14,6 +14,7 @@ public class Model {
 	public Model(Vecteur4f position, String vertPath, String fragPath, String texturePath, VAOData vaoData){
 		this.position = position;
 		this.vaoData = vaoData;
+		//this.vaoData.sauvegardeVAOData("model3D/VAOData/voitureMiniCooper.vaodata");
 		init(vertPath, fragPath, texturePath);
 	}
 	
@@ -41,7 +42,7 @@ public class Model {
 
 		matriceHomogene = Matrice4f.translation(this.position)
 				.multipliee(Matrice4f.rotationXYZ(rotationX, rotationY, rotationZ)
-						.multipliee(Matrice4f.homothetie(0.25f)
+						.multipliee(Matrice4f.homothetie(0.04f)
 				)
 		);
 		

@@ -1,6 +1,12 @@
 package dev.graphics;
 
-public class VAOData {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class VAOData implements Serializable {
+	private static final long serialVersionUID = 4841038736994409514L;
 	private float[] sommets;
 	private float[] uv;
 	private float[] normals;
@@ -11,6 +17,26 @@ public class VAOData {
 		this.uv = uv;
 		this.normals = normals;
 		this.indices = indices;
+	}
+	
+	public void sauvegardeVAOData(String sauvegarde){
+		try {
+			FileOutputStream fos = new FileOutputStream(sauvegarde);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			
+			try {
+				oos.writeObject(this);
+				oos.flush();
+			} finally {
+				try {
+					oos.close();
+				} finally {
+					fos.close();
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public float[] getSommets() {

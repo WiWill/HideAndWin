@@ -11,9 +11,10 @@ public class VertexArrayObjectTexture implements IVertexArrayObject {
 	private int vbo;
 	private int ibo;
 	private int tco;
+	private int nbo;
 	private int nbIndices;
 	
-	public VertexArrayObjectTexture(float[] sommets, int[] indices, float[] uv){
+	public VertexArrayObjectTexture(float[] sommets, int[] indices, float[] uv, float[] normals){
 		this.nbIndices = indices.length;
 		this.vao = glGenVertexArrays();
 		glBindVertexArray(this.vao);
@@ -29,6 +30,12 @@ public class VertexArrayObjectTexture implements IVertexArrayObject {
 		glBufferData(GL_ARRAY_BUFFER, Buffer.conversionFloatBuffer(uv), GL_STATIC_DRAW);
 		glVertexAttribPointer(1, 2, GL_FLOAT, false, 0, 0);
 		glEnableVertexAttribArray(1);
+		
+		this.nbo = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, this.nbo);
+		glBufferData(GL_ARRAY_BUFFER, Buffer.conversionFloatBuffer(normals), GL_STATIC_DRAW);
+		glVertexAttribPointer(2, 3, GL_FLOAT, false, 0, 0);
+		glEnableVertexAttribArray(2);
 		
 		this.ibo = glGenBuffers();
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this.ibo);

@@ -24,6 +24,7 @@ public class Game implements Runnable {
 	private ICube cube2;
 	private ICube cube3;
 	private ICube cube4;
+	private Model model;
 	
 	public Game(int width, int height){
 		this.width = width;
@@ -67,7 +68,8 @@ public class Game implements Runnable {
 		
 		this.joueur = new Joueur(200, 200, 0, 20);
 		this.ennemi = new Ennemi(new CircleHitbox(600, 200, 0, 20), new ConeVision(new Vecteur4f(600, 200, 0, 1), 135, 15, 300));
-		this.cube1 = new CubeTexture(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/texture/vert.txt", "shaders/cube/texture/frag.txt", "shaders/cube/texture/uv.bmp");
+		//this.cube1 = new CubeTexture(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/texture/vert.txt", "shaders/cube/texture/frag.txt", "shaders/cube/texture/uv.bmp");
+		this.model = new Model(new Vecteur4f(0f, 0f, 0f, 1f), "shaders/cube/texture/vert.txt", "shaders/cube/texture/frag.txt", "shaders/cube/texture/uv.bmp", ModelLoader.chargementModelOBJ("cube.obj"));
 		this.cube2 = new CubeCouleur(new Vecteur4f(2f, 0f, 0f, 1f), "shaders/cube/couleur/vert.txt", "shaders/cube/couleur/frag.txt");
 		this.cube3 = new CubeCouleur(new Vecteur4f(-2f, 0f, 0f, 1f), "shaders/cube/couleur/vert.txt", "shaders/cube/couleur/frag.txt");
 		this.cube4 = new CubeCouleur(new Vecteur4f(0f, 2f, 0f, 1f), "shaders/cube/couleur/vert.txt", "shaders/cube/couleur/frag.txt");
@@ -82,7 +84,8 @@ public class Game implements Runnable {
 
 		this.joueur.render(this.width, this.height);
 		this.ennemi.render(this.width, this.height);
-		this.cube1.render();
+		//this.cube1.render();
+		this.model.render();
 		this.cube2.render();
 		this.cube3.render();
 		this.cube4.render();

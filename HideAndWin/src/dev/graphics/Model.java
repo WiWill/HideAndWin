@@ -3,71 +3,26 @@ package dev.graphics;
 import dev.util.math.Matrice4f;
 import dev.util.math.Vecteur4f;
 
-public class CubeTexture implements ICube {
+public class Model {
 	private Vecteur4f position;
-	private float[] sommets;
-	private float[] uv;
-	private float[] normals;
-	private int[] indices;
 	private Shader shader;
+	private VAOData vaoData;
 	private VertexArrayObjectTexture vao;
 	private Texture texture;
 	float rotationX = 0.0f, rotationY = 0.0f, rotationZ = 0.0f;
 	
-	public CubeTexture(Vecteur4f position, String vertPath, String fragPath, String texturePath){
+	public Model(Vecteur4f position, String vertPath, String fragPath, String texturePath, VAOData vaoData){
 		this.position = position;
+		this.vaoData = vaoData;
 		init(vertPath, fragPath, texturePath);
 	}
 	
 	private void init(String vertPath, String fragPath, String texturePath){
-		this.sommets = new float[]{
-				-1.0f, 1.0f, -1.0f,
-				-1.0f, -1.0f, -1.0f,
-				-1.0f, 1.0f, 1.0f,
-				-1.0f, -1.0f, 1.0f,
-				1.0f, 1.0f, 1.0f,
-				1.0f, -1.0f, 1.0f,
-				1.0f, 1.0f, -1.0f,
-				1.0f, -1.0f, -1.0f
-		};
-
-		this.uv = new float[]{
-			1.0f, 0.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-			0.0f, 0.0f,
-			0.0f, 1.0f,
-			0.0f, 1.0f,
-			1.0f, 1.0f,
-			1.0f, 1.0f,
-		};
-		
-		this.normals = new float[]{
-				1.0f, 0.0f, 0.0f,
-				1.0f, 0.0f, 1.0f,
-				1.0f, 1.0f, 1.0f,
-				0.0f, 0.0f, 1.0f,
-				0.0f, 1.0f, 0.0f,
-				0.0f, 1.0f, 1.0f,
-				1.0f, 1.0f, 0.0f,
-				1.0f, 1.0f, 1.0f
-		};
-		
-		this.indices = new int[]{
-			0, 1, 2, 2, 1, 3,
-			4, 5, 6, 6, 5, 7,
-			3, 1, 5, 5, 1, 7,
-			0, 2, 6, 6, 2, 4,
-			6, 7, 0, 0, 7, 1,
-			2, 3, 4, 4, 3, 5
-		};
-		
 		this.shader = new Shader(vertPath, fragPath);
-		this.vao = new VertexArrayObjectTexture(this.sommets, this.indices, this.uv, this.normals);
+		this.vao = new VertexArrayObjectTexture(this.vaoData.getSommets(), this.vaoData.getIndices(), this.vaoData.getUv(), this.vaoData.getNormals());
 		this.texture = new Texture(texturePath);
 	}
 	
-	@Override
 	public void render(){
 		Matrice4f matriceHomogene;
 		

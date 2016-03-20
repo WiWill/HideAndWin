@@ -7,6 +7,7 @@ public class CubeCouleur implements ICube {
 	private Vecteur4f position;
 	private float[] sommets;
 	private float[] couleurs;
+	private float[] normals;
 	private int[] indices;
 	private Shader shader;
 	private VertexArrayObjectColor vao;
@@ -40,6 +41,17 @@ public class CubeCouleur implements ICube {
 			1.0f, 1.0f, 1.0f
 		};
 		
+		this.normals = new float[]{
+				1.0f, 0.0f, 0.0f,
+				1.0f, 0.0f, 1.0f,
+				1.0f, 1.0f, 1.0f,
+				0.0f, 0.0f, 1.0f,
+				0.0f, 1.0f, 0.0f,
+				0.0f, 1.0f, 1.0f,
+				1.0f, 1.0f, 0.0f,
+				1.0f, 1.0f, 1.0f
+		};
+		
 		this.indices = new int[]{
 			0, 1, 2, 2, 1, 3,
 			4, 5, 6, 6, 5, 7,
@@ -50,7 +62,7 @@ public class CubeCouleur implements ICube {
 		};
 		
 		this.shader = new Shader(vertPath, fragPath);
-		this.vao = new VertexArrayObjectColor(this.sommets, this.indices, this.couleurs);
+		this.vao = new VertexArrayObjectColor(this.sommets, this.indices, this.couleurs, this.normals);
 	}
 	
 	@Override
